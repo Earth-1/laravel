@@ -48,5 +48,12 @@ public function add_product (Request $requests){
     return redirect()->back()->with('message', 'เพิ่มแล้ว');
 }
 
+public function show_product(){
+
+    $product=product::all();
+
+    return view('admin.show_product',compact('product'));
+}
+
 }
 
