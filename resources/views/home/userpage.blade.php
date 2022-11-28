@@ -11,7 +11,7 @@
       <meta name="description" content="" />
       <meta name="author" content="" />
       <link rel="shortcut icon" href="images/favicon.png" type="">
-      <title>Famms - Fashion HTML Template</title>
+      <title>BENNY SHOP</title>
       <!-- bootstrap core css -->
       <link rel="stylesheet" type="text/css" href="home/css/bootstrap.css" />
       <!-- font awesome style -->
@@ -31,11 +31,11 @@
          <!-- end slider section -->
       </div>
       <!-- why section -->
-      @include('home.why')
+      {{-- @include('home.why') --}}
       <!-- end why section -->
 
       <!-- arrival section -->
-      @include('home.new_arrival')
+      {{-- @include('home.new_arrival') --}}
       <!-- end arrival section -->
 
       <!-- product section -->
@@ -43,10 +43,10 @@
       <!-- end product section -->
 
       <!-- subscribe section -->
-      @include('home.subscribe')
+      {{-- @include('home.subscribe') --}}
       <!-- end subscribe section -->
       <!-- client section -->
-      @include('home.client')
+      {{-- @include('home.client') --}}
       <!-- end client section -->
       <!-- footer start -->
       @include('home.footer')
