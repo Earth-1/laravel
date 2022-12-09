@@ -54,6 +54,17 @@
       <div class="hero_area">
          <!-- header section strats -->
          @include('home.header')
+
+         @if (session()->has('message'))
+
+         <div class="alert alert-success">
+
+             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+
+             {{session()->get('message')}}
+
+         </div>
+         @endif
          <!-- end header section -->
          <!-- slider section -->
          {{-- @include('home.slider') --}}
@@ -96,6 +107,13 @@
             <h1 class="tt_de">Total Price : {{$totalprice}}</h1>
 
         </div>
+
+        <div>
+          <h1 style="font-size: 25px; padding-bottom: 15px">Proceed to Opder</h1>
+          <a href="{{url('cash_order')}}" class="btn btn-danger">Cash on delivery</a>
+          <a href="http://" class="btn btn-danger">Pay Using cart</a>
+        </div>
+
       </div>
       <!-- why section -->
       {{-- @include('home.why') --}}
