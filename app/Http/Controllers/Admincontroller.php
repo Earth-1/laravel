@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Catagory;
 use App\Models\Product;
+use App\Models\Order;
 
 class Admincontroller extends Controller
 {
@@ -88,6 +89,10 @@ public function update_product_confirm(Request $requests, $id){
     return redirect()->back()->with('message', 'เพิ่มแล้ว');
 
 
+}
+public function order(){
+        $order = order::all();
+        return view('admin.order',compact('order'));
 }
 
 }
