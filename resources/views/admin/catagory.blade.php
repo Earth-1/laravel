@@ -1,90 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
+
+<head>
     @include('admin.css')
+</head>
 
-    <style type="text/css">
-    .div_center {
-        text-align: center;
-        padding-top: 40px;
-    }
-    .h2_font{
-        font-size: 40px;
-        padding-bottom: 40px;
-    }
-    .input_color{
-        color: #000;
-    }
-    .center{
-        margin: auto;
-        width: 50%;
-        text-align: center;
-        margin-top: 30px;
-        border: 3px solid white;
-    }
-
-    </style>
-  </head>
-  <body>
-    <div class="container-scroller">
-      <!-- partial:partials/_sidebar.html -->
-      @include('admin.slideber')
-      <!-- partial -->
-      <div class="container-fluid page-body-wrapper">
-        <!-- partial:partials/_navbar.html -->
-        @include('admin.header')
-        <!-- partial -->
-        <div class="main-panel">
-            <div class="content-wrapper">
-
-                @if (session()->has('message'))
-
-                <div class="alert alert-success">
-
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
-
-                    {{session()->get('message')}}
-
-                </div>
-
-
-
-
-                @endif
-                <div class="div_center">
-
-                    <h2 class="h2_font">Add Catagory</h2>
-
-                    <form action="{{url('/add_catagory')}}" method="POST">
-@csrf
-
-                        <input class="input_color" type="text" name="catagory" placeholder="Write catagory name">
-                        <input type="submit" class="btn btn-primary" name="submit" value="Add Catagory">
-                    </form>
-                </div>
-
-                <table class="center">
-                    <tr>
-                        <td>Catagory Name</td>
-                        <td>Action</td>
-                    </tr>
-
-                    @foreach ($data as $data)
-
-
-
-                    <tr>
-                        <td>{{$data->catagory_name}}</td>
-                        <td><a onclick="return confirm('คุณแน่ใจนะว่าจะลบ')" class="btn btn-danger" href="{{url('delete_catagory',$data->id)}}">Delete</a></td>
-                    </tr>
-                    @endforeach
-                </table>
-                </div>
-            </div>
-    <!-- container-scroller -->
-    <!-- plugins:js -->
+<body>
+    @include('admin.slideber')
+    @include('admin.header')
     @include('admin.script')
-    <!-- End custom js for this page -->
-  </body>
+    <main id="main" class="main">
+        <div class="pagetitle">
+            <h1>เพิ่มประเภทสินค้า</h1>
+        </div><!-- End Page Title -->
+        <section class="section dashboard">
+            <div class="row">
+                <!-- Left side columns -->
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">เพิ่มประเภทสินค้า</h5>
+                                <form action="{{ url('/add_catagory') }}" method="POST">
+                                    @csrf
+                                    <div class="row mb-3">
+                                        <div class="col-sm-8">
+                                            <input type="text" name="catagory" required>
+                                            <input type="submit" value="เพิ่ม" name="submit"
+                                                class="btn btn-outline-primary">
+                                        </div>
+                                    </div>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">ชื่อประเภทสินค้า</th>
+                                                <th scope="col">จัดการ</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($data as $data)
+                                                <tr>
+
+                                                    <td>{{ $data->catagory_name }}</td>
+                                                    <td><a class="btn btn-danger"
+                                                            onclick="return confirm('คุณแน่ใจนะว่าจะลบ')"
+                                                            href="{{ url('delete_catagory', $data->id) }}">ลบ</a></td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- End Sales Card -->
+        </section>
+
+</body>
+
 </html>

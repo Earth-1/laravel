@@ -42,6 +42,8 @@ route::get('/show_product',[AdminController::class,'show_product']);
 
 route::get('/delete_product/{id}',[AdminController::class,'delete_product']);
 
+route::get('/delete_user/{id}',[AdminController::class,'delete_user']);
+
 route::get('/update_product/{id}',[AdminController::class,'update_product']);
 
 route::post('/update_product_confirm/{id}',[AdminController::class,'update_product_confirm']);
@@ -51,6 +53,22 @@ route::get('/order',[AdminController::class,'order']);
 route::get('/delivered/{id}',[AdminController::class,'delivered']);
 
 route::get('/print_pdf/{id}',[AdminController::class,'print_pdf']);
+
+route::get('/user',[AdminController::class,'user']);
+
+route::get('/update_user/{id}',[AdminController::class,'update_user']);
+
+route::post('/update_user_confirm/{id}',[AdminController::class,'update_user_confirm']);
+
+route::get('/filter',[AdminController::class,'filter']);
+
+route::get('/order_delivery',[AdminController::class,'order_delivery']);
+
+route::get('/order_cancle',[AdminController::class,'order_cancle']);
+
+route::get('/search',[AdminController::class,'searchdata']);
+
+route::get('/searchduser',[AdminController::class,'searchduser']);
 
 
 
@@ -74,7 +92,16 @@ route::get('/remove_cart/{id}',[HomeController::class,'remove_cart']);
 
 route::get('/cash_order',[HomeController::class,'cash_order']);
 
-route::get('/stripe/{totalprice}',[HomeController::class,'stripe']);
+route::get('/paid/{totalprice}',[HomeController::class,'paid']);
 
-Route::post('stripe/{totalprice}',[HomeController::class,'stripePost'])->name('stripe.post');
+route::get('/shirt/{id}',[HomeController::class,'shirt']);
+
+route::get('/show_order',[HomeController::class,'show_order']);
+
+route::get('/cancel_order/{id}',[HomeController::class,'cancel_order']);
+
+route::post('/pay_order',[HomeController::class,'pay_order']);
+
+route::get('/shop',[HomeController::class,'shop']);
+
 

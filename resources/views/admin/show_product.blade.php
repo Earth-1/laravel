@@ -1,102 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
 
+<head>
     @include('admin.css')
-    <style type="text/css">
+</head>
 
-    .center{
-        margin: auto;
-        width: 50%;
-        border: 2px solid white;
-        text-align: center;
-        margin-top: 40px;
-    }
-    .font_size{
-        text-align: center;
-        padding-top: 20px;
-        font-size: 40px;
-    }
-    .image_size{
-        width: 150px;
-        height: 150px;
-    }
-    .th_color{
-        background: seagreen;
-    }
-    .th_de{
-        padding: 30px;
-    }
-
-    </style>
-  </head>
-  <body>
-    <div class="container-scroller">
-      <!-- partial:partials/_sidebar.html -->
-      @include('admin.slideber')
-      <!-- partial -->
-      <div class="container-fluid page-body-wrapper">
-        <!-- partial:partials/_navbar.html -->
-        @include('admin.header')
-        <!-- partial -->
-        <div class="main-panel">
-            <div class="content-wrapper">
-
-                @if (session()->has('message'))
-
-                <div class="alert alert-success">
-
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
-
-                    {{session()->get('message')}}
-
-                </div>
-
-
-
-
-                @endif
-
-
-                <h2 class="font_size">All Products</h2>
-
-                <table class="center">
-                    <tr class="th_color">
-                        <th class="th_de">Product title</th>
-                        <th class="th_de">Description</th>
-                        <th class="th_de">Quantity</th>
-                        <th class="th_de">Catagory</th>
-                        <th class="th_de">Price</th>
-                        <th class="th_de">Discount Price</th>
-                        <th class="th_de">Product Image</th>
-                        <th class="th_de">Delete</th>
-                        <th class="th_de">Edit</th>
-                    </tr>
-
-                    @foreach ($product as $product)
-
-
-
-                    <tr>
-                        <td>{{$product->title}}</td>
-                        <td>{{$product->description}}</td>
-                        <td>{{$product->quantity}}</td>
-                        <td>{{$product->catagory}}</td>
-                        <td>{{$product->price}}</td>
-                        <td>{{$product->discount_price}}</td>
-                        <td><img class="image_size" src="/product/{{$product->image}}" ></td>
-                        <td><a class="btn btn-danger" onclick="return confirm('คุณแน่ใจนะว่าจะลบ')" href="{{url('delete_product',$product->id)}}">Delete</a></td>
-                        <td><a class="btn btn-success" href="{{url('update_product',$product->id)}}">Edit</a></td>
-                    </tr>
-                    @endforeach
-                </table>
-
-                </div>
-            </div>
-    <!-- container-scroller -->
-    <!-- plugins:js -->
+<body>
+    @include('sweetalert::alert')
+    @include('admin.slideber')
+    @include('admin.header')
     @include('admin.script')
-    <!-- End custom js for this page -->
-  </body>
+    <main id="main" class="main">
+        <div class="pagetitle">
+            <h1>แสดงสินค้า</h1>
+        </div><!-- End Page Title -->
+        <section class="section dashboard">
+            <div class="row">
+                <!-- Left side columns -->
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">สินค้าทั้งหมด</h5>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">ชื่อ</th>
+                                            <th scope="col">คำอธิบาย</th>
+                                            <th scope="col">จำนวน</th>
+                                            <th scope="col">ประเภท</th>
+                                            <th scope="col">ราคา</th>
+                                            <th scope="col">ส่วนลด</th>
+                                            <th scope="col">รูปภาพ</th>
+                                            <th scope="col">ลบ</th>
+                                            <th scope="col">แก้ไข</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($product as $product)
+                                            <tr>
+                                                <td>{{ $product->title }}</td>
+                                                <td>{{ $product->description }}</td>
+                                                <td>{{ $product->quantity }}</td>
+                                                <td>{{ $product->catagory }}</td>
+                                                <td>{{ $product->price }}</td>
+                                                <td>{{ $product->discount_price }}</td>
+                                                <td><img style="width: 150px; height:150px"
+                                                        src="/product/{{ $product->image }}"></td>
+                                                <td><a class="btn btn-warning"
+                                                        href="{{ url('update_product', $product->id) }}">แก้ไข</a></td>
+                                                <td><a class="btn btn-danger"
+                                                        onclick="return confirm('คุณแน่ใจนะว่าจะลบ')"
+                                                        href="{{ url('delete_product', $product->id) }}">ลบ</a></td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- End Sales Card -->
+        </section>
+</body>
+
 </html>

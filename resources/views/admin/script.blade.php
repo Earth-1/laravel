@@ -1,18 +1,15 @@
-<script src="admin/assets/vendors/js/vendor.bundle.base.js"></script>
-    <!-- endinject -->
-    <!-- Plugin js for this page -->
-    <script src="admin/assets/vendors/chart.js/Chart.min.js"></script>
-    <script src="admin/assets/vendors/progressbar.js/progressbar.min.js"></script>
-    <script src="admin/assets/vendors/jvectormap/jquery-jvectormap.min.js"></script>
-    <script src="admin/assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-    <script src="admin/assets/vendors/owl-carousel-2/owl.carousel.min.js"></script>
-    <!-- End plugin js for this page -->
-    <!-- inject:js -->
-    <script src="admin/assets/js/off-canvas.js"></script>
-    <script src="admin/assets/js/hoverable-collapse.js"></script>
-    <script src="admin/assets/js/misc.js"></script>
-    <script src="admin/assets/js/settings.js"></script>
-    <script src="admin/assets/js/todolist.js"></script>
-    <!-- endinject -->
-    <!-- Custom js for this page -->
-    <script src="admin/assets/js/dashboard.js"></script>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<script src="admin/assets/vendor/apexcharts/apexcharts.min.js"></script>
+<script src="admin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="admin/assets/vendor/chart.js/chart.umd.js"></script>
+<script src="admin/assets/vendor/echarts/echarts.min.js"></script>
+<script src="admin/assets/vendor/quill/quill.min.js"></script>
+<script src="admin/assets/vendor/simple-datatables/simple-datatables.js"></script>
+<script src="admin/assets/vendor/tinymce/tinymce.min.js"></script>
+<script src="admin/assets/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script src="admin/assets/js/main.js"></script>

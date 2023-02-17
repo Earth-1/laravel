@@ -1,130 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
 
+<head>
     <base href="/public">
-
     @include('admin.css')
-    <style type="text/css">
+    @include('sweetalert::alert')
+</head>
 
-        .div_center{
-            text-align: center;
-            padding-top: 40px;
-        }
-        .font_size{
-            font-size: 40px;
-            padding-bottom: 40px;
-        }
-        .text_color{
-            color: #000;
-            padding-bottom: 20px;
-        }
-        label{
-            display: inline-block;
-            width: 200px;
-        }
-        .div_design{
-            padding-bottom: 15px;
-        }
-    </style>
+<body>
+    @include('admin.slideber')
+    @include('admin.header')
+    @include('admin.script')
+    <main id="main" class="main">
+        <div class="pagetitle">
+            <h1>อัปเดตสินค้า</h1>
+        </div><!-- End Page Title -->
+        <section class="section dashboard">
+            <div class="row">
+                <!-- Left side columns -->
+                <div class="col-lg-12">
+                    <div class="row">
+                        <!-- Sales Card -->
+                        <section class="section">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">อัปเดตสินค้า</h5>
+                                            <form action="{{ url('/update_product_confirm', $product->id) }}"
+                                                method="POST" enctype="multipart/form-data">
+                                                @csrf
+                                                <div class="row mb-3">
+                                                    <label for="inputText"
+                                                        class="col-sm-3 col-form-label">ขื่อสินค้า</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" name="title"
+                                                            required value="{{ $product->title }}">
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <label for="inputEmail"
+                                                        class="col-sm-3 col-form-label">รายละเอียดสินค้า</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" name="description"
+                                                            required value="{{ $product->description }}">
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <label class="col-sm-3 col-form-label">ราคาสินค้า</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="number" class="form-control" name="price"
+                                                            required value="{{ $product->price }}">
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <label class="col-sm-3 col-form-label">จำนวนสินค้า</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="number" class="form-control" name="quantity"
+                                                            required value="{{ $product->quantity }}">
+                                                    </div>
+                                                </div>
 
-  </head>
-  <body>
-    <div class="container-scroller">
-      <!-- partial:partials/_sidebar.html -->
-      @include('admin.slideber')
-      <!-- partial -->
-      <div class="container-fluid page-body-wrapper">
-        <!-- partial:partials/_navbar.html -->
-        @include('admin.header')
-        <!-- partial -->
-        <div class="main-panel">
-            <div class="content-wrapper">
-                @if (session()->has('message'))
+                                                <div class="row mb-3">
+                                                    <label for="inputText"
+                                                        class="col-sm-3 col-form-label">ประเภทสินค้า</label>
+                                                    <div class="col-sm-10">
+                                                        <select name="catagory" id="" class="text_color"
+                                                            required>
+                                                            <option value="{{ $product->catagory }}" selected>
+                                                                {{ $product->catagory }}</option>
 
-                <div class="alert alert-success">
+                                                            @foreach ($catagory as $catagory)
+                                                                <option value="{{ $catagory->catagory_name }}">
+                                                                    {{ $catagory->catagory_name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
 
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                                                <div class="row mb-3">
+                                                    <label for="inputText"
+                                                        class="col-sm-3 col-form-label">รูปภาพสินค้า</label>
+                                                    <div class="col-sm-10">
 
-                    {{session()->get('message')}}
-
-                </div>
-
-
-
-
-                @endif
-
-                <div class="div_center">
-
-                    <h1 class="font_size">Update Product</h1>
-
-                    <form action="{{url('/update_product_confirm',$product->id)}}" method="POST" enctype="multipart/form-data">
-
-                        @csrf
-
-                    <div class="div_design">
-                    <label for="" >Product Title :</label>
-                    <input class="text_color" type="text" name="title" id="" placeholder="Write a title" required value="{{$product->title}}">
-                </div>
-                    <div class="div_design">
-                    <label for="">Product Description :</label>
-                    <input class="text_color" type="text" name="description" id="" placeholder="Write a description" required value="{{$product->description}}">
-                </div>
-                    <div class="div_design">
-                    <label for="">Product Price :</label>
-                    <input class="text_color" type="number" name="price" id="" placeholder="Write a price" required value="{{$product->price}}">
-                </div>
-                <div class="div_design">
-                    <label for="">Discount Price :</label>
-                    <input class="text_color" type="number" name="dis_price" id="" placeholder="Write a discount price" value="{{$product->discount_price}}">
-                </div>
-                    <div class="div_design">
-                    <label for="">Product Quantity :</label>
-                    <input class="text_color" type="number" min="0" name="quantity" id="" placeholder="Write a quantity" required value="{{$product->quantity}}">
-                </div>
-
-                    <div class="div_design">
-                    <label for="">Product Catagory :</label>
-                    <select name="catagory" id="" class="text_color" required>
-                        <option value="{{$product->catagory}}" selected>{{$product->catagory}}</option>
-
-                        @foreach ($catagory as $catagory)
-
-
-
-                        <option value="{{$catagory->catagory_name}}">{{$catagory->catagory_name}}</option>
-
-                        @endforeach
-                    </select>
-                </div>
-
-                <div class="div_design">
-                    <label for="">Current Product Image :</label>
-                    <img src="/product/{{$product->image}}" height="100" width="100" style="margin:auto">
-                </div>
-
-
-
-
-                <div class="div_design">
-                    <label for="">Change Product Image :</label>
-                    <input type="file" name="image" >
-                </div>
-                <div class="div_design">
-                    <input type="submit" value="Update product" class="btn btn-primary">
-                </div>
-            </form>
-
-
-                </div>
-
+                                                        <input type="file" name="image">
+                                                    </div>
+                                                    <div class="my-3">
+                                                        <input type="submit" value="อัปเดต"
+                                                            class="btn btn-outline-primary">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
                 </div>
             </div>
-    <!-- container-scroller -->
-    <!-- plugins:js -->
-    @include('admin.script')
-    <!-- End custom js for this page -->
-  </body>
+        </section>
+</body>
+
 </html>

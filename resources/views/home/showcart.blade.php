@@ -1,155 +1,207 @@
-<!DOCTYPE html>
-<html>
-   <head>
-      <!-- Basic -->
-      <meta charset="utf-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <!-- Mobile Metas -->
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-      <!-- Site Metas -->
-      <meta name="keywords" content="" />
-      <meta name="description" content="" />
-      <meta name="author" content="" />
-      <link rel="shortcut icon" href="images/favicon.png" type="">
+  <html lang="en">
+
+  <head>
+
+      <!-- Basic Page Needs
+     ================================================== -->
+      <meta charset="utf-8">
       <title>BENNY SHOP</title>
-      <!-- bootstrap core css -->
-      <link rel="stylesheet" type="text/css" href="home/css/bootstrap.css" />
-      <!-- font awesome style -->
-      <link href="home/css/font-awesome.min.css" rel="stylesheet" />
-      <!-- Custom styles for this template -->
-      <link href="home/css/style.css" rel="stylesheet" />
-      <!-- responsive style -->
-      <link href="home/css/responsive.css" rel="stylesheet" />
 
-      <style type="text/css">
+      <!-- Mobile Specific Metas
+     ================================================== -->
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="description" content="Construction Html5 Template">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+      <meta name="author" content="Themefisher">
+      <meta name="generator" content="Themefisher Constra HTML Template v1.0">
 
-      .center{
-        margin: auto;
-        width: 70%;
-        text-align: center;
-        padding: 30px;
-      }
+      <!-- Favicon -->
+      {{-- <link rel="shortcut icon" type="image/x-icon" href="home/images/favicon.png"> --}}
 
-      table,th,td{
-        border: 1px solid black;
-      }
-      .th_deg{
-        font-size: 30px;
-        padding: 5px;
-      }
-      .img_deg{
-        height: 200px;
-        width: 200px;
-      }
-      .tt_de{
-        font-size: 20px;
-        padding: 40px;
-      }
+      <!-- Themefisher Icon font -->
+      <link rel="stylesheet" href="home/plugins/themefisher-font/style.css">
+      <!-- bootstrap.min css -->
+      <link rel="stylesheet" href="home/plugins/bootstrap/css/bootstrap.min.css">
 
-    </style>
+      <!-- Animate css -->
+      <link rel="stylesheet" href="home/plugins/animate/animate.css">
+      <!-- Slick Carousel -->
+      <link rel="stylesheet" href="home/plugins/slick/slick.css">
+      <link rel="stylesheet" href="home/plugins/slick/slick-theme.css">
 
-   </head>
+      <!-- Main Stylesheet -->
+      <link rel="stylesheet" href="home/css/style.css">
 
-   <body>
-      <div class="hero_area">
-         <!-- header section strats -->
-         @include('home.header')
+      <script type="text/javascript" charset="UTF-8"
+          src="https://maps.googleapis.com/maps-api-v3/api/js/51/7/intl/th_ALL/common.js"></script>
+      <script type="text/javascript" charset="UTF-8"
+          src="https://maps.googleapis.com/maps-api-v3/api/js/51/7/intl/th_ALL/util.js"></script>
+  </head>
 
-         @if (session()->has('message'))
+  <body id="body">
 
-         <div class="alert alert-success">
+      <!-- Start Top Header Bar -->
+      @include('home.header')
+      @include('sweetalert::alert')
 
-             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+      @if (session()->has('message'))
+          <div class="alert alert-success">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+              {{ session()->get('message') }}
+          </div>
+      @endif
 
-             {{session()->get('message')}}
+      <section class="page-header">
+          <div class="container">
+              <div class="row">
+                  <div class="col-md-12">
+                      <div class="content">
+                          <h1 class="page-name">Cart</h1>
+                          <ol class="breadcrumb">
+                              <li><a href="{{ url('/') }}">Home</a></li>
+                              <li class="active">cart</li>
+                          </ol>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
 
-         </div>
-         @endif
-         <!-- end header section -->
-         <!-- slider section -->
-         {{-- @include('home.slider') --}}
-         <!-- end slider section -->
+      <?php $totalprice = 0; ?>
 
+      <div class="page-wrapper">
+          <div class="cart shopping">
+              <div class="container">
+                  <div class="row">
+                      <div class="col-md-8 col-md-offset-2">
+                          <div class="block">
+                              <div class="product-list">
+                                  <form method="post">
+                                      <table class="table">
+                                          <thead>
+                                              <tr>
+                                                  <th class="">Item Name</th>
+                                                  <th class="">Item Price</th>
+                                                  <th class="">Price</th>
+                                                  <th>Size</th>
+                                                  <th class="">Actions</th>
 
-      <div class="center">
-        <table>
+                                              </tr>
+                                          </thead>
+                                          <tbody>
+                                              @foreach ($cart as $cart)
+                                                  <tr class="">
+                                                      <td class="">
+                                                          <div class="product-info">
+                                                              <img width="80" src="/product/{{ $cart->image }}"
+                                                                  alt="">
+                                                              <a href="#!">{{ $cart->product_title }}</a>
+                                                          </div>
+                                                      </td>
+                                                      <td class="">{{ $cart->quantity }}</td>
+                                                      <td class="">{{ $cart->price }} บาท</td>
+                                                      <td>
 
+                                                          {{ $cart->size }}
+                                                      </td>
+                                                      <td class="">
+                                                          <a class="product-remove btn btn-danger"
+                                                              data-id="{{ $cart->id }}" id="confirmation"><span
+                                                                  style="color: #fff !important;"><i
+                                                                      class="fa fa-times">X</i></span></a>
 
-
-
-            <tr>
-
-                <th class="th_deg">Product Title</th>
-                <th class="th_deg">product Quantity</th>
-                <th class="th_deg">Price</th>
-                <th class="th_deg">Image</th>
-                <th class="th_deg">Action</th>
-
-            </tr>
-
-            <tr>
-                <?php $totalprice = 0; ?>
-
-                @foreach ($cart as $cart)
-
-                <td>{{$cart->product_title}}</td>
-                <td>{{$cart->quantity}}</td>
-                <td>{{$cart->price}}</td>
-                <td><img src="/product/{{$cart->image}}" class="img_deg"></td>
-                <td><a href="{{url('remove_cart',$cart->id)}}" class="btn btn-danger" onclick="return confirm('คุณแน่ใจนะว่าจะลบ')">Remove Product</a></td>
-
-            </tr>
-            <?php $totalprice = $totalprice + $cart->price ?>
-            @endforeach
-        </table>
-        <div>
-
-            <h1 class="tt_de">Total Price : {{$totalprice}}</h1>
-
-        </div>
-
-        <div>
-          <h1 style="font-size: 25px; padding-bottom: 15px">Proceed to Opder</h1>
-          <a href="{{url('cash_order')}}" class="btn btn-danger">Cash on delivery</a>
-          <a href="{{url('stripe',$totalprice)}}" class="btn btn-danger">Pay Using card</a>
-        </div>
-
+                                                      </td>
+                                                  </tr>
+                                                  <?php $totalprice = $totalprice + $cart->price; ?>
+                                              @endforeach
+                                          </tbody>
+                                      </table>
+                                      <hr class="border-3">
+                                      <br>
+                                      <a onclick="return confirm('แน่ใจนะครับ')" href="{{ url('cash_order') }}"
+                                          class="btn btn-main pull-right">จ่ายเงินปลายทาง</a>
+                                      <a href="{{ url('paid', $totalprice) }}"
+                                          class="btn btn-main pull-left">จ่ายเงิน</a>
+                                  </form>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
       </div>
-      <!-- why section -->
-      {{-- @include('home.why') --}}
-      <!-- end why section -->
 
-      <!-- arrival section -->
-      {{-- @include('home.new_arrival') --}}
-      <!-- end arrival section -->
 
-      <!-- product section -->
-      {{-- @include('home.product') --}}
-      <!-- end product section -->
 
-      <!-- subscribe section -->
-      {{-- @include('home.subscribe') --}}
-      <!-- end subscribe section -->
-      <!-- client section -->
-      {{-- @include('home.client') --}}
-      <!-- end client section -->
-      <!-- footer start -->
-      {{-- @include('home.footer') --}}
-      <!-- footer end -->
-      <div class="cpy_">
-         <p class="mx-auto">© 2021 All Rights Reserved By <a href="https://html.design/">Free Html Templates</a><br>
 
-            Distributed By <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
+      {{-- <div>
+        <h1 style="font-size: 25px; padding-bottom: 15px">วิธีการชำระเงิน</h1>
+        <a href="{{url('cash_order')}}" class="btn btn-danger" onclick="return confirm('คุณแน่ใจนะ')">จ่ายปลายทาง</a>
+    <a href="{{url('stripe',$totalprice)}}" class="btn btn-danger">โอนเงิน</a>
+    </div> --}}
 
-         </p>
-      </div>
-      <!-- jQery -->
-      <script src="home/js/jquery-3.4.1.min.js"></script>
-      <!-- popper js -->
-      <script src="home/js/popper.min.js"></script>
-      <!-- bootstrap js -->
-      <script src="home/js/bootstrap.js"></script>
-      <!-- custom js -->
-      <script src="home/js/custom.js"></script>
-   </body>
-</html>
+
+      @include('home.footer')
+
+
+
+      <!--Essential Scripts=====================================-->
+
+      <!-- Main jQuery -->
+      <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <script src="home/plugins/jquery/dist/jquery.min.js"></script>
+      <!-- Bootstrap 3.1 -->
+      <script src="home/plugins/bootstrap/js/bootstrap.min.js"></script>
+      <!-- Bootstrap Touchpin -->
+      <script src="home/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+      <!-- Instagram Feed Js -->
+      <script src="home/plugins/instafeed/instafeed.min.js"></script>
+      <!-- Video Lightbox Plugin -->
+      <script src="home/plugins/ekko-lightbox/dist/ekko-lightbox.min.js"></script>
+      <!-- Count Down Js -->
+      <script src="home/plugins/syo-timer/build/jquery.syotimer.min.js"></script>
+
+      <!-- slick Carousel -->
+      <script src="home/plugins/slick/slick.min.js"></script>
+      <script src="home/plugins/slick/slick-animation.min.js"></script>
+
+      <!-- Google Mapl -->
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC72vZw-6tGqFyRhhg5CkF2fqfILn2Tsw"></script>
+      <script type="text/javascript" src="home/plugins/google-map/gmap.js"></script>
+
+      <!-- Main Js File -->
+      <script src="home/js/script.js"></script>
+
+
+
+      <script>
+          $('#confirmation').click(function() {
+              let id = $(this).attr('data-id');
+              Swal.fire({
+                  title: '',
+                  text: "ต้องการลบหรือไม่",
+                  icon: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'ตกลง',
+                  cancelButtonText: 'ยกเลิก'
+              }).then((result) => {
+                  if (result.isConfirmed) {
+                      setTimeout(() => {
+                          location.href = "remove_cart/" + id
+                      }, 700)
+                      Swal.fire(
+                          '',
+                          'เรียบร้อย!',
+                          'success'
+                      )
+                  }
+              })
+
+          })
+      </script>
+
+  </body>
+
+  </html>
